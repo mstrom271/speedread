@@ -14,9 +14,15 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
-        src/main.cpp
-        src/myclass.h
-        rcc/rcc.qrc
+    src/main.cpp
+    src/MainWidget.h
+    src/ControlWidget.h
+    src/LastBooksWidget.h
+    src/BookWidget.h
+    src/BookWidget.cpp
+    src/Settings.h
+    src/Settings.cpp
+    rcc/rcc.qrc
 )
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED)

@@ -1,13 +1,12 @@
-
-#include "myclass.h"
+#include "MainWidget.h"
+#include "Settings.h"
 #include <QApplication>
 
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
 
-    MyClass myClass;
-    myClass.setFixedSize(800, 600);
-    myClass.show();
+    MainWidget mainWidget;
+    mainWidget.show();
 
     return app.exec();
 }

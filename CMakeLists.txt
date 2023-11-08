@@ -16,8 +16,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PROJECT_SOURCES
     src/main.cpp
     src/MainWidget.h
+    src/MainWidget.cpp
     src/ControlWidget.h
+    src/ControlWidget.cpp
     src/LastBooksWidget.h
+    src/LastBooksWidget.cpp
     src/BookWidget.h
     src/BookWidget.cpp
     src/Settings.h

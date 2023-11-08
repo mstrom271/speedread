@@ -72,6 +72,7 @@ class ControlWidget : public QWidget {
     void updateFragSize(int);
     void play();
     void showLastBooksWidget();
+    void showSettingsWidget();
 };
 
 #endif

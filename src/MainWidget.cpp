@@ -6,12 +6,13 @@ MainWidget::MainWidget(QWidget *wgt) : QWidget(wgt) {
         bookWidget = new BookWidget();
         controlWidget = new ControlWidget();
         lastBooksWidget = new LastBooksWidget();
-
+        settingsWidget = new SettingsWidget();
 
     this->setLayout(stackedLayout);
         stackedLayout->addWidget(bookWidget);
         stackedLayout->addWidget(controlWidget);
         stackedLayout->addWidget(lastBooksWidget);
+        stackedLayout->addWidget(settingsWidget);
     // clang-format on
 
     connect(controlWidget, SIGNAL(play()), this, SLOT(play()));
@@ -45,10 +46,16 @@ MainWidget::MainWidget(QWidget *wgt) : QWidget(wgt) {
     connect(lastBooksWidget, SIGNAL(showBookWidget()), this,
             SLOT(showBookWidget()));
 
+    connect(controlWidget, SIGNAL(showSettingsWidget()), this,
+            SLOT(showSettingsWidget()));
+    connect(settingsWidget, SIGNAL(showBookWidget()), this,
+            SLOT(showBookWidget()));
+
     stackedLayout->setContentsMargins(0, 0, 0, 0);
     stackedLayout->setStackingMode(QStackedLayout::StackingMode::StackAll);
     stackedLayout->setCurrentWidget(controlWidget);
     lastBooksWidget->hide();
+    settingsWidget->hide();
     bookWidget->init();
     resize(Settings::getWindowWidth(), Settings::getWindowHeight());
 
@@ -121,11 +128,20 @@ void MainWidget::pause() {
 void MainWidget::showLastBooksWidget() {
     bookWidget->hide();
     controlWidget->hide();
+    settingsWidget->hide();
     lastBooksWidget->show();
+}
+
+void MainWidget::showSettingsWidget() {
+    bookWidget->hide();
+    controlWidget->hide();
+    lastBooksWidget->hide();
+    settingsWidget->show();
 }
 
 void MainWidget::showBookWidget() {
     lastBooksWidget->hide();
+    settingsWidget->hide();
     bookWidget->show();
     controlWidget->show();
 }

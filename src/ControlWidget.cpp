@@ -64,6 +64,7 @@ ControlWidget::ControlWidget(QWidget *wgt) : QWidget(wgt) {
                 speedSlider->setSliderPosition(Settings::getSpeed());
 
             connect(openBtn, SIGNAL(clicked()), this, SIGNAL(showLastBooksWidget()));
+            connect(settingsBtn, SIGNAL(clicked()), this, SIGNAL(showSettingsWidget()));
     // clang-format on
 }
 

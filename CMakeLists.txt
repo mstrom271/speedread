@@ -23,6 +23,8 @@ set(PROJECT_SOURCES
     src/LastBooksWidget.cpp
     src/BookWidget.h
     src/BookWidget.cpp
+    src/SettingsWidget.h
+    src/SettingsWidget.cpp
     src/Settings.h
     src/Settings.cpp
     rcc/rcc.qrc

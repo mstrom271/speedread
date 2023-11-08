@@ -5,6 +5,7 @@
 #include "ControlWidget.h"
 #include "LastBooksWidget.h"
 #include "Settings.h"
+#include "SettingsWidget.h"
 #include <QCoreApplication>
 #include <QLayout>
 #include <QPushButton>
@@ -18,6 +19,7 @@ class MainWidget : public QWidget {
         BookWidget *bookWidget;
         ControlWidget *controlWidget;
         LastBooksWidget *lastBooksWidget;
+        SettingsWidget *settingsWidget;
     // clang-format on
 
     QTimer timer;
@@ -32,6 +34,7 @@ class MainWidget : public QWidget {
     void next();
     void pause();
     void showLastBooksWidget();
+    void showSettingsWidget();
     void showBookWidget();
 
   protected:

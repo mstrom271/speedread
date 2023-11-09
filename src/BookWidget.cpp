@@ -62,13 +62,13 @@ void BookWidget::init() {
     loadBook(Settings::getLastBookFile());
 }
 
-void BookWidget::setFont(QFont &newFont) {
+void BookWidget::setFont(QFont newFont) {
     Settings::setFont(newFont);
     font = newFont;
     fm_cache = QFontMetrics(font);
     width_cache.clear();
     rows.clear();
-    MarkupType markupType = MarkupType::NoMarkup;
+    markupType = MarkupType::NoMarkup;
 }
 
 void BookWidget::breakdown() {

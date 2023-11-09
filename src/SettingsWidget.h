@@ -4,6 +4,7 @@
 #include "Settings.h"
 #include <QCheckBox>
 #include <QComboBox>
+#include <QFont>
 #include <QLabel>
 #include <QLayout>
 #include <QPushButton>
@@ -17,19 +18,20 @@ class SettingsWidget : public QWidget {
         QScrollArea *scrollArea;
             QWidget *scrollWidget;
                 QVBoxLayout *scrollLayout;
-                    QHBoxLayout *hLayout1;
+                    QVBoxLayout *vLayout1;
                         QLabel *lbl_theme;
                         QLabel *lbl_theme_detailed;
                         QComboBox *cmb_theme;
-                    QHBoxLayout *hLayout2;
+                    QVBoxLayout *vLayout2;
                         QLabel *lbl_language;
                         QLabel *lbl_language_detailed;
                         QComboBox *cmb_language;
-                    QHBoxLayout *hLayout3;
+                    QVBoxLayout *vLayout3;
                         QLabel *lbl_font;
                         QLabel *lbl_font_detailed;
-                        QComboBox *cmb_font;
-                    QHBoxLayout *hLayout4;
+                        QComboBox *cmb_font_family;
+                        QComboBox *cmb_font_size;
+                    QVBoxLayout *vLayout4;
                         QLabel *lbl_keepAwake;
                         QLabel *lbl_keepAwake_detailed;
                         QCheckBox *ckb_keepAwake;
@@ -40,9 +42,14 @@ class SettingsWidget : public QWidget {
     SettingsWidget(QWidget *wgt = nullptr);
 
   public slots:
+    void updateFontFamilySilent();
+    void updateFontFamily();
+    void updateFontSize();
+
   protected:
   signals:
     void showBookWidget();
+    void setFont(QFont font);
 };
 
 #endif

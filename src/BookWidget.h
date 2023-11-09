@@ -61,7 +61,6 @@ class BookWidget : public QWidget {
   public:
     BookWidget(QWidget *wgt = nullptr);
     void init();
-    void setFont(QFont &newFont);
     void breakdown();
 
     void mapBook(unsigned char level, uint start, uint length);
@@ -79,6 +78,7 @@ class BookWidget : public QWidget {
     std::pair<int, int> getFragSizeRange();
 
   public slots:
+    void setFont(QFont newFont);
     bool loadBook(const QString &filename);
     void setBookPos(double newBookPos);
     void setBookWidth(int newBookWidth);

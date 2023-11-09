@@ -50,6 +50,8 @@ MainWidget::MainWidget(QWidget *wgt) : QWidget(wgt) {
             SLOT(showSettingsWidget()));
     connect(settingsWidget, SIGNAL(showBookWidget()), this,
             SLOT(showBookWidget()));
+    connect(settingsWidget, SIGNAL(setFont(QFont)), bookWidget,
+            SLOT(setFont(QFont)));
 
     stackedLayout->setContentsMargins(0, 0, 0, 0);
     stackedLayout->setStackingMode(QStackedLayout::StackingMode::StackAll);

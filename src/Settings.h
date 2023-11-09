@@ -16,6 +16,7 @@ class Settings {
     uint windowPosX, windowPosY;
     uint windowWidth, windowHeight;
     QFont font;
+    QString language;
     uint bookWidth;
     uint fragSize;
     uint speed;
@@ -35,6 +36,9 @@ class Settings {
 
     static QFont getFont();
     static void setFont(QFont newFont);
+
+    static QString getLanguage();
+    static void setLanguage(QString newLang);
 
     static uint getBookWidth();
     static void setBookWidth(uint newBookWidth);

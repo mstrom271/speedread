@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.24.2)
 
 project(SpeedRead VERSION 0.2 LANGUAGES CXX)
 
@@ -27,6 +27,8 @@ set(PROJECT_SOURCES
     src/SettingsWidget.cpp
     src/Settings.h
     src/Settings.cpp
+    src/Language.h
+    src/Language.cpp
     rcc/rcc.qrc
 )
 

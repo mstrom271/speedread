@@ -11,7 +11,7 @@ class Recipe(ConanFile):
         pass
 
     def build_requirements(self):
-        self.tool_requires("cmake/3.26.4")
+        self.tool_requires("cmake/3.24.2")
 
     def layout(self):
         cmake_layout(self)

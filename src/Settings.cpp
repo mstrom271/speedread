@@ -1,4 +1,5 @@
 #include "Settings.h"
+#include "Language.h"
 #include <QDataStream>
 #include <QIODevice>
 
@@ -28,6 +29,10 @@ Settings::Settings() {
             .value("/font",
                    serializeFontToByteArray(QFont("Arial", 20, QFont::Normal)))
             .toByteArray());
+    if (firstRun)
+        language = Language::getSystemLanguage();
+    else
+        language = settings.value("/language", "en").toString();
 
     bookWidth = settings.value("/bookWidth", 0).toUInt();
     fragSize = settings.value("/fragSize", 50).toUInt();
@@ -60,6 +65,12 @@ void Settings::setFont(QFont newFont) {
     Settings::getInstance().settings.setValue(
         "/font", serializeFontToByteArray(newFont));
     Settings::getInstance().font = newFont;
+}
+
+QString Settings::getLanguage() { return Settings::getInstance().language; }
+void Settings::setLanguage(QString newLang) {
+    Settings::getInstance().settings.setValue("/language", newLang);
+    Settings::getInstance().language = newLang;
 }
 
 uint Settings::getBookWidth() { return Settings::getInstance().bookWidth; }

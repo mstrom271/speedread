@@ -1,5 +1,6 @@
 #include "LastBooksWidget.h"
 #include "Language.h"
+#include "Theme.h"
 
 void LastBooksWidget::onThemeChange() {}
 
@@ -135,11 +136,10 @@ void LastBooksWidget::showEvent(QShowEvent *event) {
 }
 
 bool LastBooksWidget::event(QEvent *event) {
-    /* if (event->type() == ThemeChangeEvent::type){
+    if (event->type() == ThemeChangeEvent::type) {
         onThemeChange();
         return true;
-    }else  */
-    if (event->type() == LanguageChangeEvent::type) {
+    } else if (event->type() == LanguageChangeEvent::type) {
         onLanguageChange();
         return true;
     }

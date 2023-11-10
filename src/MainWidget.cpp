@@ -1,4 +1,6 @@
 #include "MainWidget.h"
+#include "Language.h"
+#include "Theme.h"
 
 void MainWidget::onThemeChange() {}
 
@@ -97,11 +99,10 @@ void MainWidget::resizeEvent(QResizeEvent *event) {
 }
 
 bool MainWidget::event(QEvent *event) {
-    /* if (event->type() == ThemeChangeEvent::type){
+    if (event->type() == ThemeChangeEvent::type) {
         onThemeChange();
         return true;
-    }else  */
-    if (event->type() == LanguageChangeEvent::type) {
+    } else if (event->type() == LanguageChangeEvent::type) {
         onLanguageChange();
         return true;
     }

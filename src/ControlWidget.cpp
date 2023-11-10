@@ -1,5 +1,6 @@
 #include "ControlWidget.h"
 #include "Language.h"
+#include "Theme.h"
 
 void ControlWidget::onThemeChange() {}
 
@@ -251,11 +252,10 @@ void ControlWidget::paintEvent(QPaintEvent *event) {
 }
 
 bool ControlWidget::event(QEvent *event) {
-    /* if (event->type() == ThemeChangeEvent::type){
+    if (event->type() == ThemeChangeEvent::type) {
         onThemeChange();
         return true;
-    }else  */
-    if (event->type() == LanguageChangeEvent::type) {
+    } else if (event->type() == LanguageChangeEvent::type) {
         onLanguageChange();
         return true;
     }

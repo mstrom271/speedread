@@ -29,6 +29,8 @@ set(PROJECT_SOURCES
     src/Settings.cpp
     src/Language.h
     src/Language.cpp
+    src/Theme.h
+    src/Theme.cpp
     rcc/rcc.qrc
 )
 

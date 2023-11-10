@@ -1,5 +1,7 @@
 #include "SettingsWidget.h"
+#include "Language.h"
 #include "Settings.h"
+#include "Theme.h"
 #include <QFontDatabase>
 
 void SettingsWidget::onThemeChange() {}
@@ -74,6 +76,7 @@ SettingsWidget::SettingsWidget(QWidget *wgt) {
     updateFontFamilySilent();
 
     cmb_theme->addItems({"dark", "grey", "light"});
+    cmb_theme->setCurrentText(Settings::getTheme());
     cmb_language->addItems({"en", "ru"});
     cmb_language->setCurrentText(Settings::getLanguage());
 
@@ -85,6 +88,7 @@ SettingsWidget::SettingsWidget(QWidget *wgt) {
 
     connect(cmb_language, SIGNAL(textActivated(QString)),
             SLOT(updateLanguage()));
+    connect(cmb_theme, SIGNAL(textActivated(QString)), SLOT(updateTheme()));
 }
 
 void SettingsWidget::updateFontFamilySilent() {
@@ -119,12 +123,16 @@ void SettingsWidget::updateLanguage() {
     Language::notifyAll();
 }
 
+void SettingsWidget::updateTheme() {
+    Settings::setTheme(cmb_theme->currentText());
+    Theme::notifyAll();
+}
+
 bool SettingsWidget::event(QEvent *event) {
-    /* if (event->type() == ThemeChangeEvent::type){
+    if (event->type() == ThemeChangeEvent::type) {
         onThemeChange();
         return true;
-    }else  */
-    if (event->type() == LanguageChangeEvent::type) {
+    } else if (event->type() == LanguageChangeEvent::type) {
         onLanguageChange();
         return true;
     }

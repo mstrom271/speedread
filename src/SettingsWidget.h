@@ -1,7 +1,6 @@
 #ifndef __SETTINGSWIDGET_H__
 #define __SETTINGSWIDGET_H__
 
-#include "Language.h"
 #include "Settings.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -49,6 +48,7 @@ class SettingsWidget : public QWidget {
     void updateFontFamily();
     void updateFontSize();
     void updateLanguage();
+    void updateTheme();
 
   protected:
     virtual bool event(QEvent *event) override;

@@ -1,5 +1,6 @@
 #include "BookWidget.h"
 #include "Language.h"
+#include "Theme.h"
 #include <QXmlStreamReader>
 
 bool loadBookTXT(const QString &filename, QString &book) {
@@ -407,11 +408,10 @@ void BookWidget::mouseMoveEvent(QMouseEvent *event) {
 }
 
 bool BookWidget::event(QEvent *event) {
-    /* if (event->type() == ThemeChangeEvent::type){
+    if (event->type() == ThemeChangeEvent::type) {
         onThemeChange();
         return true;
-    }else  */
-    if (event->type() == LanguageChangeEvent::type) {
+    } else if (event->type() == LanguageChangeEvent::type) {
         onLanguageChange();
         return true;
     }

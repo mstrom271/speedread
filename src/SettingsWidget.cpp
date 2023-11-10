@@ -2,6 +2,20 @@
 #include "Settings.h"
 #include <QFontDatabase>
 
+void SettingsWidget::onThemeChange() {}
+
+void SettingsWidget::onLanguageChange() {
+    lbl_theme->setText(tr("theme"));
+    lbl_theme_detailed->setText(tr("theme detailed"));
+    lbl_language->setText(tr("language"));
+    lbl_language_detailed->setText(tr("language detailed"));
+    lbl_font->setText(tr("font"));
+    lbl_font_detailed->setText(tr("font detailed"));
+    lbl_keepAwake->setText(tr("keep awake"));
+    lbl_keepAwake_detailed->setText(tr("keep awake detailed"));
+    ckb_keepAwake->setText(tr("keep awake"));
+}
+
 SettingsWidget::SettingsWidget(QWidget *wgt) {
     // clang-format off
     vLayout = new QVBoxLayout;
@@ -53,28 +67,23 @@ SettingsWidget::SettingsWidget(QWidget *wgt) {
 
     scrollArea->setWidgetResizable(true);
 
-    lbl_theme->setText("theme");
-    lbl_theme_detailed->setText("theme detailed");
-    lbl_language->setText("language");
-    lbl_language_detailed->setText("language detailed");
-    lbl_font->setText("font");
-    lbl_font_detailed->setText("font detailed");
-    lbl_keepAwake->setText("keep awake");
-    lbl_keepAwake_detailed->setText("keep awake detailed");
-    ckb_keepAwake->setText("keep awake");
+    onLanguageChange();
 
     cmb_font_family->addItems(QFontDatabase::families());
     cmb_font_family->setCurrentText(Settings::getFont().family());
     updateFontFamilySilent();
 
-    cmb_theme->addItems({"Dark", "Grey", "Light"});
-    cmb_language->addItems({"English", "Russian"});
+    cmb_theme->addItems({"dark", "grey", "light"});
+    cmb_language->addItems({"en", "ru"});
 
     connect(okBtn, SIGNAL(clicked()), this, SIGNAL(showBookWidget()));
     connect(cmb_font_family, SIGNAL(textActivated(QString)),
             SLOT(updateFontFamily()));
     connect(cmb_font_size, SIGNAL(textActivated(QString)),
             SLOT(updateFontSize()));
+
+    connect(cmb_language, SIGNAL(textActivated(QString)),
+            SLOT(updateLanguage()));
 }
 
 void SettingsWidget::updateFontFamilySilent() {
@@ -101,4 +110,22 @@ void SettingsWidget::updateFontSize() {
     font.setFamily(cmb_font_family->currentText());
     font.setPointSize(cmb_font_size->currentText().toInt());
     emit setFont(font);
+}
+
+void SettingsWidget::updateLanguage() {
+    Language::setLanguage(cmb_language->currentText());
+    Language::notifyAll();
+}
+
+bool SettingsWidget::event(QEvent *event) {
+    /* if (event->type() == ThemeChangeEvent::type){
+        onThemeChange();
+        return true;
+    }else  */
+    if (event->type() == LanguageChangeEvent::type) {
+        onLanguageChange();
+        return true;
+    }
+
+    return QWidget::event(event);
 }

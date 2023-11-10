@@ -40,6 +40,9 @@ class ControlWidget : public QWidget {
 
     bool bookWidthSliderPressed = false;
 
+    void onThemeChange();
+    void onLanguageChange();
+
   public:
     ControlWidget(QWidget *wgt = nullptr);
     int getSpeed();
@@ -63,8 +66,9 @@ class ControlWidget : public QWidget {
     void setSpeed(int newSpeed);
 
   protected:
-    void resizeEvent(QResizeEvent *event);
-    void paintEvent(QPaintEvent *event);
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void paintEvent(QPaintEvent *event) override;
+    virtual bool event(QEvent *event) override;
 
   signals:
     void updateBookPos(double);

@@ -1,4 +1,5 @@
 #include "BookWidget.h"
+#include "Language.h"
 #include <QXmlStreamReader>
 
 bool loadBookTXT(const QString &filename, QString &book) {
@@ -54,7 +55,11 @@ bool loadBookFB2(const QString &filename, QString &book) {
     return true;
 }
 
-BookWidget::BookWidget(QWidget *wgt) : QWidget(wgt) {}
+void BookWidget::onThemeChange() {}
+
+void BookWidget::onLanguageChange() {}
+
+BookWidget::BookWidget(QWidget *wgt) : QWidget(wgt) { onLanguageChange(); }
 
 void BookWidget::init() {
     setBookWidth(Settings::getBookWidth());
@@ -399,4 +404,17 @@ void BookWidget::mouseMoveEvent(QMouseEvent *event) {
                 fm_cache.height();
         setBookPos(newLineNumber);
     }
+}
+
+bool BookWidget::event(QEvent *event) {
+    /* if (event->type() == ThemeChangeEvent::type){
+        onThemeChange();
+        return true;
+    }else  */
+    if (event->type() == LanguageChangeEvent::type) {
+        onLanguageChange();
+        return true;
+    }
+
+    return QWidget::event(event);
 }

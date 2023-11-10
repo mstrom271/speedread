@@ -58,6 +58,9 @@ class BookWidget : public QWidget {
     uint fragStart = 0;
     uint fragEnd = 0;
 
+    void onThemeChange();
+    void onLanguageChange();
+
   public:
     BookWidget(QWidget *wgt = nullptr);
     void init();
@@ -86,10 +89,11 @@ class BookWidget : public QWidget {
     void next();
 
   protected:
-    void paintEvent(QPaintEvent *e) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
+    virtual void paintEvent(QPaintEvent *e) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void mousePressEvent(QMouseEvent *event) override;
+    virtual void mouseMoveEvent(QMouseEvent *event) override;
+    virtual bool event(QEvent *event) override;
 
   signals:
     void updateBookPosRange(int max);

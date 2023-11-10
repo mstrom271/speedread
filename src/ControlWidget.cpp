@@ -1,27 +1,40 @@
 #include "ControlWidget.h"
+#include "Language.h"
+
+void ControlWidget::onThemeChange() {}
+
+void ControlWidget::onLanguageChange() {
+    playBtn->setText(tr("PlayBtn"));
+    openBtn->setText(tr("Open"));
+    bookPosBtn->setText(tr("Pos"));
+    bookWidthBtn->setText(tr("Width"));
+    fragSizeBtn->setText(tr("Frag"));
+    speedBtn->setText(tr("Speed"));
+    settingsBtn->setText(tr("Settings"));
+}
 
 ControlWidget::ControlWidget(QWidget *wgt) : QWidget(wgt) {
     // clang-format off
-    vLayout = new QVBoxLayout();
-        hLayout1 = new QHBoxLayout();
-            playBtn = new QPushButton("PlayBtn");
-        gridLayout = new QGridLayout();
-            bookPosLabel = new QLabel("--.--");
-            bookWidthLabel = new QLabel("--.--");
-            fragSizeLabel = new QLabel("--.--");
-            speedLabel = new QLabel("--.--");
+    vLayout = new QVBoxLayout;
+        hLayout1 = new QHBoxLayout;
+            playBtn = new QPushButton;
+        gridLayout = new QGridLayout;
+            bookPosLabel = new QLabel;
+            bookWidthLabel = new QLabel;
+            fragSizeLabel = new QLabel;
+            speedLabel = new QLabel;
 
             bookPosSlider = new QSlider(Qt::Vertical);
             bookWidthSlider = new QSlider(Qt::Vertical);
             fragSizeSlider = new QSlider(Qt::Vertical);
             speedSlider = new QSlider(Qt::Vertical);
 
-            openBtn = new QPushButton("Open");
-            bookPosBtn = new QPushButton("Pos");
-            bookWidthBtn = new QPushButton("Width");
-            fragSizeBtn = new QPushButton("Frag");
-            speedBtn = new QPushButton("Speed");
-            settingsBtn = new QPushButton("Settings");
+            openBtn = new QPushButton;
+            bookPosBtn = new QPushButton;
+            bookWidthBtn = new QPushButton;
+            fragSizeBtn = new QPushButton;
+            speedBtn = new QPushButton;
+            settingsBtn = new QPushButton;
 
     this->setLayout(vLayout);
         vLayout->addStretch();
@@ -66,6 +79,7 @@ ControlWidget::ControlWidget(QWidget *wgt) : QWidget(wgt) {
             connect(openBtn, SIGNAL(clicked()), this, SIGNAL(showLastBooksWidget()));
             connect(settingsBtn, SIGNAL(clicked()), this, SIGNAL(showSettingsWidget()));
     // clang-format on
+    onLanguageChange();
 }
 
 int ControlWidget::getSpeed() { return speedSlider->sliderPosition(); }
@@ -234,4 +248,17 @@ void ControlWidget::paintEvent(QPaintEvent *event) {
                          height());
     }
     QWidget::paintEvent(event);
+}
+
+bool ControlWidget::event(QEvent *event) {
+    /* if (event->type() == ThemeChangeEvent::type){
+        onThemeChange();
+        return true;
+    }else  */
+    if (event->type() == LanguageChangeEvent::type) {
+        onLanguageChange();
+        return true;
+    }
+
+    return QWidget::event(event);
 }

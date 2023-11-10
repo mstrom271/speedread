@@ -22,7 +22,9 @@ void Language::notifyAll() {
 
 // load translations for relative languages
 void Language::setLanguage(QString lang) {
-    Language::getInstance().translator.load(":/main_" + correct(lang) + ".qm");
+    lang = correct(lang);
+    bool ok = Language::getInstance().translator.load(":rcc/translation_" +
+                                                      lang + ".qm");
     Settings::setLanguage(lang);
 }
 

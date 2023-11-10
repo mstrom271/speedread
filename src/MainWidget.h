@@ -26,6 +26,9 @@ class MainWidget : public QWidget {
     bool playInProcess = false;
     bool dragStart = false;
 
+    void onThemeChange();
+    void onLanguageChange();
+
   public:
     MainWidget(QWidget *wgt = nullptr);
 
@@ -38,10 +41,11 @@ class MainWidget : public QWidget {
     void showBookWidget();
 
   protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
+    virtual void mousePressEvent(QMouseEvent *event) override;
+    virtual void mouseMoveEvent(QMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QMouseEvent *event) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual bool event(QEvent *event) override;
 
   signals:
 };

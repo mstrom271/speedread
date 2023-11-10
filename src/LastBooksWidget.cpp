@@ -1,12 +1,20 @@
 #include "LastBooksWidget.h"
+#include "Language.h"
+
+void LastBooksWidget::onThemeChange() {}
+
+void LastBooksWidget::onLanguageChange() {
+    openBookBtn->setText(tr("open"));
+    cancelBtn->setText(tr("cancel"));
+}
 
 LastBooksWidget::LastBooksWidget(QWidget *wgt) : QWidget(wgt) {
     // clang-format off
-    vLayout = new QVBoxLayout();
-        booksListWidget = new QListWidget();
-        hLayout = new QHBoxLayout();
-            openBookBtn = new QPushButton("open");
-            cancelBtn = new QPushButton("cancel");
+    vLayout = new QVBoxLayout;
+        booksListWidget = new QListWidget;
+        hLayout = new QHBoxLayout;
+            openBookBtn = new QPushButton;
+            cancelBtn = new QPushButton;
 
 
     this->setLayout(vLayout);
@@ -16,8 +24,8 @@ LastBooksWidget::LastBooksWidget(QWidget *wgt) : QWidget(wgt) {
             hLayout->addWidget(cancelBtn);
     // clang-format on
 
+    onLanguageChange();
     booksListWidget->setWordWrap(true);
-
     connect(openBookBtn, SIGNAL(clicked()), this, SLOT(bookSelectionDialog()));
     connect(cancelBtn, SIGNAL(clicked()), this, SIGNAL(showBookWidget()));
     connect(booksListWidget, SIGNAL(itemClicked(QListWidgetItem *)), this,
@@ -124,4 +132,17 @@ void LastBooksWidget::showEvent(QShowEvent *event) {
     }
 
     QWidget::showEvent(event);
+}
+
+bool LastBooksWidget::event(QEvent *event) {
+    /* if (event->type() == ThemeChangeEvent::type){
+        onThemeChange();
+        return true;
+    }else  */
+    if (event->type() == LanguageChangeEvent::type) {
+        onLanguageChange();
+        return true;
+    }
+
+    return QWidget::event(event);
 }

@@ -1,5 +1,9 @@
 #include "MainWidget.h"
 
+void MainWidget::onThemeChange() {}
+
+void MainWidget::onLanguageChange() {}
+
 MainWidget::MainWidget(QWidget *wgt) : QWidget(wgt) {
     // clang-format off
     stackedLayout = new QStackedLayout();
@@ -60,6 +64,7 @@ MainWidget::MainWidget(QWidget *wgt) : QWidget(wgt) {
     settingsWidget->hide();
     bookWidget->init();
     resize(Settings::getWindowWidth(), Settings::getWindowHeight());
+    onLanguageChange();
 
     // hack, to get proper initial DPI on android
     QTimer *oneShotTimer = new QTimer(this);
@@ -89,6 +94,19 @@ void MainWidget::resizeEvent(QResizeEvent *event) {
     Settings::setWindowHeight(event->size().height());
 
     QWidget::resizeEvent(event);
+}
+
+bool MainWidget::event(QEvent *event) {
+    /* if (event->type() == ThemeChangeEvent::type){
+        onThemeChange();
+        return true;
+    }else  */
+    if (event->type() == LanguageChangeEvent::type) {
+        onLanguageChange();
+        return true;
+    }
+
+    return QWidget::event(event);
 }
 
 void MainWidget::play() {

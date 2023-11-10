@@ -21,6 +21,8 @@ class LastBooksWidget : public QWidget {
             QPushButton *openBookBtn;
             QPushButton *cancelBtn;
     // clang-format on
+    void onThemeChange();
+    void onLanguageChange();
 
   public:
     LastBooksWidget(QWidget *wgt = nullptr);
@@ -30,8 +32,9 @@ class LastBooksWidget : public QWidget {
     void bookSelectionDialog();
 
   protected:
-    void resizeEvent(QResizeEvent *event) override;
-    void showEvent(QShowEvent *event) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual bool event(QEvent *event) override;
 
   signals:
     void loadBook(const QString &filename);

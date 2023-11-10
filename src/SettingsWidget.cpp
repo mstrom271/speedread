@@ -75,6 +75,7 @@ SettingsWidget::SettingsWidget(QWidget *wgt) {
 
     cmb_theme->addItems({"dark", "grey", "light"});
     cmb_language->addItems({"en", "ru"});
+    cmb_language->setCurrentText(Settings::getLanguage());
 
     connect(okBtn, SIGNAL(clicked()), this, SIGNAL(showBookWidget()));
     connect(cmb_font_family, SIGNAL(textActivated(QString)),
@@ -113,7 +114,8 @@ void SettingsWidget::updateFontSize() {
 }
 
 void SettingsWidget::updateLanguage() {
-    Language::setLanguage(cmb_language->currentText());
+    Settings::setLanguage(cmb_language->currentText());
+    Language::loadTranslation(Settings::getLanguage());
     Language::notifyAll();
 }
 

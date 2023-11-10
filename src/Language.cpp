@@ -12,8 +12,6 @@ Language &Language::getInstance() {
 
 // notify all widgets to change a language
 void Language::notifyAll() {
-    QApplication::instance()->installTranslator(
-        &Language::getInstance().translator);
     const QWidgetList allWidgets = QApplication::allWidgets();
     for (auto widget : allWidgets) {
         QApplication::instance()->postEvent(widget, new LanguageChangeEvent);
@@ -21,14 +19,13 @@ void Language::notifyAll() {
 }
 
 // load translations for relative languages
-void Language::setLanguage(QString lang) {
-    lang = correct(lang);
-    bool ok = Language::getInstance().translator.load(":rcc/translation_" +
-                                                      lang + ".qm");
-    Settings::setLanguage(lang);
+void Language::loadTranslation(QString lang) {
+    bool isOk = Language::getInstance().translator.load(":rcc/translation_" +
+                                                        correct(lang) + ".qm");
+    if (isOk)
+        QApplication::instance()->installTranslator(
+            &Language::getInstance().translator);
 }
-
-QString Language::getLanguage() { return Settings::getLanguage(); }
 
 QString Language::getSystemLanguage() {
     QString lang;

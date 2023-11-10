@@ -21,8 +21,7 @@ class Language {
   public:
     static Language &getInstance();
 
-    static void setLanguage(QString newLanguage);
-    static QString getLanguage();
+    static void loadTranslation(QString lang);
     static QString getSystemLanguage();
     static void notifyAll();
 

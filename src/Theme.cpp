@@ -18,6 +18,36 @@ void Theme::notifyAll() {
     }
 }
 
+// load theme
+void Theme::applyTheme(QString theme) {
+    QPalette palette = QApplication::palette();
+
+    if (Settings::getTheme() == "dark") {
+        palette.setBrush(QPalette::Window, Qt::black);
+        palette.setBrush(QPalette::Base, Qt::black);
+        palette.setBrush(QPalette::Text, QColor(Qt::white).darker(200));
+        palette.setBrush(QPalette::BrightText, Qt::white);
+        palette.setBrush(QPalette::Button, Qt::black);
+        palette.setBrush(QPalette::ButtonText, Qt::white);
+    } else if (Settings::getTheme() == "grey") {
+        palette.setBrush(QPalette::Window, Qt::gray);
+        palette.setBrush(QPalette::Base, Qt::gray);
+        palette.setBrush(QPalette::Text, QColor(Qt::white).darker(200));
+        palette.setBrush(QPalette::BrightText, Qt::white);
+        palette.setBrush(QPalette::Button, Qt::gray);
+        palette.setBrush(QPalette::ButtonText, Qt::white);
+    } else if (Settings::getTheme() == "light") {
+        palette.setBrush(QPalette::Window, Qt::lightGray);
+        palette.setBrush(QPalette::Base, Qt::lightGray);
+        palette.setBrush(QPalette::Text, QColor(Qt::lightGray).darker(200));
+        palette.setBrush(QPalette::BrightText, Qt::black);
+        palette.setBrush(QPalette::Button, Qt::lightGray);
+        palette.setBrush(QPalette::ButtonText, Qt::black);
+    }
+
+    QApplication::setPalette(palette);
+}
+
 // TODO:
 QString Theme::getSystemTheme() { return correct("dark"); }
 

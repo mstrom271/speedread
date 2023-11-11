@@ -18,10 +18,9 @@ class Theme {
   public:
     static Theme &getInstance();
 
+    static void applyTheme(QString theme);
     static QString getSystemTheme();
     static void notifyAll();
-
-  private:
     static QString correct(QString theme);
 };
 

@@ -119,12 +119,13 @@ void SettingsWidget::updateFontSize() {
 
 void SettingsWidget::updateLanguage() {
     Settings::setLanguage(cmb_language->currentText());
-    Language::loadTranslation(Settings::getLanguage());
+    Language::applyLanguage(Settings::getLanguage());
     Language::notifyAll();
 }
 
 void SettingsWidget::updateTheme() {
     Settings::setTheme(cmb_theme->currentText());
+    Theme::applyTheme(Settings::getTheme());
     Theme::notifyAll();
 }
 

@@ -18,8 +18,8 @@ void Language::notifyAll() {
     }
 }
 
-// load translations for relative languages
-void Language::loadTranslation(QString lang) {
+// load translation for relative language
+void Language::applyLanguage(QString lang) {
     bool isOk = Language::getInstance().translator.load(":rcc/translation_" +
                                                         correct(lang) + ".qm");
     if (isOk)

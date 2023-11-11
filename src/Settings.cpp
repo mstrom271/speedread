@@ -34,12 +34,13 @@ Settings::Settings() {
     if (firstRun)
         language = Language::getSystemLanguage();
     else
-        language = settings.value("/language", "en").toString();
+        language =
+            settings.value("/language", Language::correct("en")).toString();
 
     if (firstRun)
         theme = Theme::getSystemTheme();
     else
-        theme = settings.value("/theme", "dark").toString();
+        theme = settings.value("/theme", Theme::correct("dark")).toString();
 
     bookWidth = settings.value("/bookWidth", 0).toUInt();
     fragSize = settings.value("/fragSize", 50).toUInt();

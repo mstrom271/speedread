@@ -1,6 +1,7 @@
 #include "BookWidget.h"
 #include "Language.h"
 #include "Theme.h"
+#include <QPalette>
 #include <QXmlStreamReader>
 
 bool loadBookTXT(const QString &filename, QString &book) {
@@ -123,6 +124,7 @@ void BookWidget::breakdown() {
     emit updateBookPos(getBookPos());
 }
 
+// TODO:: add "", '', (), {}, []
 QVector<QSet<QChar>> markerTable{
     {'.', '!', '?', ';', ',', ':', ' ', '\t', '\n'},
     {' ', '\t'},
@@ -324,6 +326,9 @@ void BookWidget::paintEvent(QPaintEvent *e) {
     int str_begin = std::max(this->width(), minWidth) / 2 - getBookWidth() / 2;
 
     painter.setFont(font);
+    QPalette palette = QApplication::palette();
+    QColor color0 = palette.brush(QPalette::BrightText).color();
+    QColor color1 = palette.brush(QPalette::Text).color();
 
     int curr_line = floor(bookPos);
     double top_rel_y = floor(bookPos) - bookPos;
@@ -356,9 +361,9 @@ void BookWidget::paintEvent(QPaintEvent *e) {
         for (int i = 0; i < str.length(); i++) {
             if (rows[curr_line].begin + i >= fragStart &&
                 rows[curr_line].begin + i < fragEnd)
-                painter.setPen(QColor(255, 255, 255));
+                painter.setPen(color0);
             else
-                painter.setPen(QColor(127, 127, 127));
+                painter.setPen(color1);
 
             if (str[i] == ' ')
                 str_advance += wideSpaceWidth;

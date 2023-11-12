@@ -58,7 +58,7 @@ while IFS= read -r lang
 do
     ${QT_ROOT}/gcc_64/bin/lupdate ./src/ -ts ./translations/translation_${lang}.ts
     ${QT_ROOT}/gcc_64/bin/lrelease ./translations/*.ts
-done < "./translations/languages.txt"
+done < "./translations/list.txt"
 mv ./translations/*.qm ./rcc/rcc
 
 # Resources

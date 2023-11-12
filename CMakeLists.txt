@@ -31,6 +31,7 @@ set(PROJECT_SOURCES
     src/Language.cpp
     src/Theme.h
     src/Theme.cpp
+    src/config.h
     rcc/rcc.qrc
 )
 
@@ -41,13 +42,12 @@ qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-
+# pass variables from cmake to our code
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/config.h @ONLY)
 if (ANDROID)
     set_target_properties(${PROJECT_NAME} PROPERTIES
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/android/android
     )
-
-    # pass variable to AndroidManifest.xml
     string(REPLACE "." ".a" ANDROID_PROJECT_NAME ${PROJECT_NAME})
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml.in ${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml @ONLY)
 endif()

@@ -13,25 +13,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(PROJECT_SOURCES
-    src/main.cpp
-    src/MainWidget.h
-    src/MainWidget.cpp
-    src/ControlWidget.h
-    src/ControlWidget.cpp
-    src/LastBooksWidget.h
-    src/LastBooksWidget.cpp
-    src/BookWidget.h
-    src/BookWidget.cpp
-    src/SettingsWidget.h
-    src/SettingsWidget.cpp
-    src/Settings.h
-    src/Settings.cpp
-    src/Language.h
-    src/Language.cpp
-    src/Theme.h
-    src/Theme.cpp
-    src/config.h
+file (GLOB PROJECT_SOURCES
+    src/*.h
+    src/*.cpp
     rcc/rcc.qrc
 )
 

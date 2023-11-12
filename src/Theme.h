@@ -1,7 +1,9 @@
 #ifndef __THEME_H__
 #define __THEME_H__
 
+#include <QColor>
 #include <QEvent>
+#include <QMap>
 
 class ThemeChangeEvent : public QEvent {
   public:
@@ -22,6 +24,20 @@ class Theme {
     static QString getSystemTheme();
     static void notifyAll();
     static QString correct(QString theme);
+
+    enum ColorRole {
+        TransparentText,
+        Text,
+        Background,
+        Control,
+        ControlStart,
+        ControlStop
+    };
+    static void setColor(ColorRole colorRole, QColor color);
+    static QColor getColor(ColorRole colorRole);
+
+  private:
+    QMap<ColorRole, QColor> colorMap;
 };
 
 #endif

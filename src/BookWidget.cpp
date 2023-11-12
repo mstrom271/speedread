@@ -327,8 +327,8 @@ void BookWidget::paintEvent(QPaintEvent *e) {
 
     painter.setFont(font);
     QPalette palette = QApplication::palette();
-    QColor color0 = palette.brush(QPalette::BrightText).color();
-    QColor color1 = palette.brush(QPalette::Text).color();
+    QColor color0 = Theme::getColor(Theme::Text);
+    QColor color1 = Theme::getColor(Theme::TransparentText);
 
     int curr_line = floor(bookPos);
     double top_rel_y = floor(bookPos) - bookPos;

@@ -192,50 +192,32 @@ void ControlWidget::resizeEvent(QResizeEvent *event) {
         QString slider_quartsize =
             QString::number(static_cast<int>(wgt->width() * (wgt_size / 4)));
 
+        // clang-format off
         styleQSlider =
             "\
-            QSlider::groove:vertical {\
-                background: #393939;\
-                position: absolute; /* absolutely position 4px from the left and right of the widget. setting margins on the widget should work too... */\
-                left: 4px; right: 4px;\
-            }\
-            \
             QSlider::handle:vertical {\
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);;\
-                border: 1px solid #8f8f8f;\
-                height: " +
-            slider_fullsize + "px;\
-                border-radius: " +
-            slider_halfsize + "px;\
-                margin: 0px -" +
-            slider_quartsize +
-            "px; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */\
-            }\
-            \
-            QSlider::add-page:vertical {\
-                background: #393939;\
-            }\
-            \
-            QSlider::sub-page:vertical {\
-                background: #393939;\
-            }\
-            ";
+                height: " + slider_fullsize + "px;\
+                border-radius: " + slider_halfsize + "px;\
+                margin: 0px -" + slider_quartsize + "px;\
+            }";
+        // clang-format on
 
         wgt->setStyleSheet(styleQSlider);
     }
 
     playBtn->setFixedHeight(200);
 
-    for (auto wgt : std::initializer_list<QPushButton *>{
+    for (auto btn : std::initializer_list<QPushButton *>{
              playBtn, openBtn, bookPosBtn, bookWidthBtn, fragSizeBtn, speedBtn,
              settingsBtn}) {
-        wgt->setContentsMargins(0, 0, 0, 0);
-        wgt->setMaximumWidth(
+        btn->setContentsMargins(0, 0, 0, 0);
+        btn->setMaximumWidth(
             std::min(QApplication::primaryScreen()->size().width(), width()) /
             7);
-        wgt->setMinimumHeight(
+        btn->setMinimumHeight(
             QApplication::primaryScreen()->physicalDotsPerInch() * 0.3);
     }
+
     QWidget::resizeEvent(event);
 }
 
@@ -243,7 +225,7 @@ void ControlWidget::paintEvent(QPaintEvent *event) {
     if (bookWidthSliderPressed) {
         QPainter painter(this);
         int indent = (width() - bookWidthSlider->sliderPosition()) / 2;
-        painter.setPen(Qt::white);
+        painter.setPen(Theme::getColor(Theme::Text));
         painter.drawLine(indent, 0, indent, height());
         painter.drawLine(width() - indent - 1, 0, width() - indent - 1,
                          height());

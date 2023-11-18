@@ -1,3 +1,5 @@
+#pragma once
+
 // clang-format off
 #define PROJECT_NAME "@PROJECT_NAME@"
 #define PROJECT_VERSION "@PROJECT_VERSION@"

@@ -29,16 +29,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 # pass variables from cmake to our code
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/config.h @ONLY)
 if (ANDROID)
-    # set_target_properties(${PROJECT_NAME} PROPERTIES
-    #     QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/android/android
-    # )
-    string(REPLACE "." ".a" ANDROID_PROJECT_NAME ${PROJECT_NAME})
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml.in ${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml @ONLY)
-endif()
 
-# install(TARGETS ${PROJECT_NAME}
-#     BUNDLE DESTINATION .
-#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-# )
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+
+    string(REPLACE "." ".a" ANDROID_PROJECT_NAME ${PROJECT_NAME})
+    # configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml.in ${CMAKE_CURRENT_SOURCE_DIR}/build/android/android/AndroidManifest.xml @ONLY)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml.in ${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml @ONLY)
+endif()
 
 qt_finalize_executable(${PROJECT_NAME})
